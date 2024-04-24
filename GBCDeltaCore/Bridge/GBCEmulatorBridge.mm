@@ -76,6 +76,7 @@
         std::shared_ptr<gambatte::GB> gambatte(new gambatte::GB());
         gambatte->setInputGetter(inputGetter.get());
         gambatte->setSaveDir(_gameSaveDirectory.fileSystemRepresentation);
+
         _gambatte = gambatte;
         
         _cheats = [NSMutableSet set];
@@ -137,12 +138,12 @@
 
 #pragma mark - Inputs -
 
-- (void)activateInput:(NSInteger)input value:(double)value playerIndex:(NSInteger)playerIndex
+- (void)activateInput:(NSInteger)input value:(double)value at:(NSInteger)playerIndex
 {
     self.inputGetter->activateInput((unsigned)input);
 }
 
-- (void)deactivateInput:(NSInteger)input playerIndex:(NSInteger)playerIndex
+- (void)deactivateInput:(NSInteger)input at:(NSInteger)playerIndex
 {
     self.inputGetter->deactivateInput((unsigned)input);
 }
@@ -291,6 +292,26 @@
 - (NSTimeInterval)frameDuration
 {
     return (1.0 / 60.0);
+}
+
+#pragma mark - Palette -
+
+- (void)updatePalette
+{
+    self.gambatte->setDmgPaletteColor(0, 0, self.palette0color0);
+    self.gambatte->setDmgPaletteColor(0, 1, self.palette0color1);
+    self.gambatte->setDmgPaletteColor(0, 2, self.palette0color2);
+    self.gambatte->setDmgPaletteColor(0, 3, self.palette0color3);
+    self.gambatte->setDmgPaletteColor(1, 0, self.palette1color0);
+    self.gambatte->setDmgPaletteColor(1, 1, self.palette1color1);
+    self.gambatte->setDmgPaletteColor(1, 2, self.palette1color2);
+    self.gambatte->setDmgPaletteColor(1, 3, self.palette1color3);
+    self.gambatte->setDmgPaletteColor(2, 0, self.palette2color0);
+    self.gambatte->setDmgPaletteColor(2, 1, self.palette2color1);
+    self.gambatte->setDmgPaletteColor(2, 2, self.palette2color2);
+    self.gambatte->setDmgPaletteColor(2, 3, self.palette2color3);
+    
+    return;
 }
 
 @end
